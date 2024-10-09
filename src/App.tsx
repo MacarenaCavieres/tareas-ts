@@ -13,7 +13,17 @@ function App() {
     return (
         <>
             <header className="bg-teal-900">
-                <h1 className="text-bold text-white text-5xl text-center py-10">Tareas</h1>
+                <div className="max-w-4xl mx-auto flex justify-between items-center">
+                    <h1 className="text-bold text-white text-5xl text-center py-10">Tareas</h1>
+                    <button
+                        type="button"
+                        className="font-bold uppercase bg-emerald-200 hover:bg-emerald-100 
+                        p-3 text-slate-800 disabled:opacity-10 rounded-md"
+                        onClick={() => dispatch({ type: "clear-todos" })}
+                    >
+                        reiniciar app
+                    </button>
+                </div>
             </header>
 
             <section className="bg-teal-800 py-20 px-5">

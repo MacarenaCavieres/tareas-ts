@@ -3,7 +3,8 @@ import type { Todo } from "../types";
 export type TodoActions =
     | { type: "save-todo"; payload: { newTodo: Todo } }
     | { type: "set-activeId"; payload: { id: Todo["id"] } }
-    | { type: "delete-todo"; payload: { id: Todo["id"] } };
+    | { type: "delete-todo"; payload: { id: Todo["id"] } }
+    | { type: "clear-todos" };
 
 export type TodoState = {
     todos: Todo[];
@@ -49,6 +50,13 @@ export const todoReducer = (state: TodoState = initialState, action: TodoActions
         return {
             ...state,
             todos: state.todos.filter((todo) => todo.id !== action.payload.id),
+        };
+    }
+
+    if (action.type === "clear-todos") {
+        return {
+            todos: [],
+            activeId: "",
         };
     }
 
