@@ -1,10 +1,14 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import { initialState, todoReducer } from "./reducers/todo-reducer";
 import Form from "./components/Form";
 import TodoList from "./components/TodoList";
 
 function App() {
     const [state, dispatch] = useReducer(todoReducer, initialState);
+
+    useEffect(() => {
+        localStorage.setItem("todo", JSON.stringify(state.todos));
+    }, [state.todos]);
 
     return (
         <>
@@ -18,7 +22,7 @@ function App() {
                 </div>
             </section>
             <section className="max-w-4xl mx-auto">
-                <TodoList todos={state.todos} />
+                <TodoList todos={state.todos} dispatch={dispatch} />
             </section>
         </>
     );
