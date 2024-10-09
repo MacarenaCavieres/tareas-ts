@@ -24,7 +24,7 @@ export default function TodoList({ todos, dispatch }: TodoListProps) {
                         <button onClick={() => dispatch({ type: "set-activeId", payload: { id: item.id } })}>
                             <PencilSquareIcon className="h-8 w-8 text-gray-800" />
                         </button>
-                        <button>
+                        <button onClick={() => dispatch({ type: "delete-todo", payload: { id: item.id } })}>
                             <XCircleIcon className="h-8 w-8 text-red-500" />
                         </button>
                     </div>

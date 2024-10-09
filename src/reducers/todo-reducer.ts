@@ -2,7 +2,8 @@ import type { Todo } from "../types";
 
 export type TodoActions =
     | { type: "save-todo"; payload: { newTodo: Todo } }
-    | { type: "set-activeId"; payload: { id: Todo["id"] } };
+    | { type: "set-activeId"; payload: { id: Todo["id"] } }
+    | { type: "delete-todo"; payload: { id: Todo["id"] } };
 
 export type TodoState = {
     todos: Todo[];
@@ -41,6 +42,13 @@ export const todoReducer = (state: TodoState = initialState, action: TodoActions
         return {
             ...state,
             activeId: action.payload.id,
+        };
+    }
+
+    if (action.type === "delete-todo") {
+        return {
+            ...state,
+            todos: state.todos.filter((todo) => todo.id !== action.payload.id),
         };
     }
 
