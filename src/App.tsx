@@ -1,6 +1,9 @@
+import { useReducer } from "react";
 import Form from "./components/Form";
+import { initialState, todoReducer } from "./reducers/todo-reducer";
 
 function App() {
+    // const [state,dispatch] = useReducer(todoReducer,initialState)
     return (
         <>
             <header className="bg-teal-900">
