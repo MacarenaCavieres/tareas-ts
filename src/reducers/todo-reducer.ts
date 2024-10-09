@@ -12,6 +12,11 @@ export const initialState: TodoState = {
 
 export const todoReducer = (state: TodoState = initialState, action: TodoActions) => {
     if (action.type === "save-todo") {
-        console.log("save todo");
+        return {
+            ...state,
+            todos: [...state.todos, action.payload.newTodo],
+        };
     }
+
+    return state;
 };

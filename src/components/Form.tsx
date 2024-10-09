@@ -1,7 +1,13 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, Dispatch, FormEvent } from "react";
 import { Todo } from "../types";
+import { TodoActions, TodoState } from "../reducers/todo-reducer";
 
-export default function Form() {
+type FormTodo = {
+    dispatch: Dispatch<TodoActions>;
+    state: TodoState;
+};
+
+export default function Form({ dispatch, state }: FormTodo) {
     const [todo, setTodo] = useState<Todo>({
         name: "",
     });
@@ -18,8 +24,13 @@ export default function Form() {
         return name.trim() !== "";
     };
 
+    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        dispatch({ type: "save-todo", payload: { newTodo: todo } });
+    };
+
     return (
-        <form className="space-y-5 bg-white shadow p-10 rounded-lg">
+        <form className="space-y-5 bg-white shadow p-10 rounded-lg" onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 gap-3">
                 <label htmlFor="name" className="font-bold">
                     Tarea:
